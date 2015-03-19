@@ -1,0 +1,23 @@
+# Gemfile
+
+gem 'warden_login', github: 'ritxi/warden_login'
+
+# spec_helper.rb
+
+require 'warden_login'
+
+# requests/my_spec.rb
+
+let(:user) { create(:user) }
+before { signin_as(user) }
+
+it 'is signed in' do
+  visit admin_path
+end
+
+
+it 'is signed in and signed out' do
+  signin_as(user) do
+    visit admin_path
+  end
+end
